@@ -27,11 +27,11 @@ jobs:
         php-version: '8.2'
         extensions: mbstring, pdo_sqlite, xml, bcmath, intl
 
-    - name: Instalar Composer
-      run: composer install --no-interaction --prefer-dist
-
     - name: Desactivar bloqueo de advisories de Composer en CI
       run: composer config policy.advisories.block false
+
+    - name: Instalar Composer
+      run: composer install --no-interaction --prefer-dist
 
     - name: Copiar .env
       run: cp .env.example .env
