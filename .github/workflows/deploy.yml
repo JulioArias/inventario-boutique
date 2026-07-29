@@ -10,6 +10,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      APP_ENV: testing
+      DB_CONNECTION: sqlite
+      DB_DATABASE: database/database.sqlite
 
     steps:
 
@@ -30,6 +34,12 @@ jobs:
 
     - name: Generar APP_KEY
       run: php artisan key:generate
+
+    - name: Preparar SQLite para pruebas
+      run: |
+        mkdir -p database
+        touch database/database.sqlite
+        php artisan migrate --no-interaction || true
 
     - name: Ejecutar pruebas
       run: php artisan test
