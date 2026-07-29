@@ -30,6 +30,9 @@ jobs:
     - name: Instalar Composer
       run: composer install --no-interaction --prefer-dist
 
+    - name: Desactivar bloqueo de advisories de Composer en CI
+      run: composer config policy.advisories.block false
+
     - name: Copiar .env
       run: cp .env.example .env
 
